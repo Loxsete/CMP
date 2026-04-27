@@ -1,7 +1,0 @@
-extern malloc
-extern free
-
-fn main() {
-    int p = malloc(64)
-    free(p)
-}
