@@ -2,9 +2,9 @@ CC      = gcc
 CFLAGS  = -Wall -Wextra -std=c99 -Isrc
 
 SRC     = src/main.c src/lexer.c src/parser.c src/codegen.c
-TARGET  = compiler
+TARGET  = cmp
 
-EXAMPLE = examples/file.ic
+EXAMPLE = examples/file.cmp
 
 .PHONY: all clean run
 

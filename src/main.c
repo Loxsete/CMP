@@ -24,7 +24,7 @@ static int is_num_str(const char *s) {
 static void usage(const char *prog)
 {
     fprintf(stderr,
-        "usage: %s <file.ic> [options]\n"
+        "usage: %s <file.cmp> [options]\n"
         "  -o <file>   output binary (default: a)\n"
         "  -v          verbose output\n"
         "  --debug     keep .asm and .o after build\n",
@@ -199,7 +199,7 @@ int main(int argc, char *argv[])
         die(opts.input, lineno, "unclosed '{'");
 
     if (opts.verbose)
-        printf(":: parsed %d nodes\n", node_count);
+        printf("CMP parsed %d nodes\n", node_count);
 
     FILE *out = fopen(asm_path, "w");
     if (!out) { perror(asm_path); return 1; }
@@ -207,7 +207,7 @@ int main(int argc, char *argv[])
     fclose(out);
 
     if (opts.verbose)
-        printf(":: assembling %s\n", asm_path);
+        printf("CMP assembling %s\n", asm_path);
 
     char cmd[512];
     snprintf(cmd, sizeof(cmd), "nasm -felf64 %s -o %s 2>&1", asm_path, obj_path);
@@ -217,7 +217,7 @@ int main(int argc, char *argv[])
     }
 
     if (opts.verbose)
-        printf(":: linking %s\n", opts.output);
+        printf("CMP linking %s\n", opts.output);
 
     snprintf(cmd, sizeof(cmd), "gcc -no-pie %s -o %s%s 2>&1", obj_path, opts.output, opts.ldflags);
     if (system(cmd) != 0) {
@@ -228,12 +228,12 @@ int main(int argc, char *argv[])
     if (!opts.debug) {
         remove(obj_path);
         if (opts.verbose)
-            printf(":: cleaned up intermediate files\n");
+            printf("CMP cleaned up intermediate files\n");
     } else {
-        printf(":: debug: keeping %s %s\n", asm_path, obj_path);
+        printf("CMP debug: keeping %s %s\n", asm_path, obj_path);
     }
 
-    printf(":: done -> %s\n", opts.output);
+    printf("CMP done -> %s\n", opts.output);
     free(source);
     return 0;
 }

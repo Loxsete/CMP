@@ -5,10 +5,10 @@ make
 
 ## Usage
 ```bash
-./compiler file.ic           # compiles to ./a
-./compiler file.ic -o out    # compiles to ./out
-./compiler file.ic -v        # verbose, shows what's going on
-./compiler file.ic --debug   # keeps the .asm and .o files around
+./cmp file.cmp           # compiles to ./a
+./cmp file.cmp -o out    # compiles to ./out
+./cmp file.cmp -v        # verbose, shows what's going on
+./cmp file.cmp --debug   # keeps the .asm and .o files around
 ./a
 ```
 
@@ -129,8 +129,8 @@ fn main() {
 ```
 To compile with another library, pass -l while compilling
 ```
-./compiler file.ic -l m
-./compiler file.ic -l pthread
+./cmp file.cmp -l m
+./cmp file.cmp -l pthread
 ```
 
 ### Comments

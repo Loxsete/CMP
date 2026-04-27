@@ -1,6 +1,6 @@
-# IC — Idiot Compiler
+# CMP — CMP
 
-A dumb little compiler I wrote in C to figure out how compilers actually work.
+A dumb little cmp I wrote in C to figure out how cmps actually work.
 Inspired by my older [QCC](https://github.com/Loxsete/qcc) project, but I wanted to go further this time.
 
 ---
