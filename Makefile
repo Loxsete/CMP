@@ -1,5 +1,5 @@
 CC      = gcc
-CFLAGS  = -Wall -Wextra -std=c99 -Isrc
+CFLAGS  = -Wall -Wextra -std=c99 -Iinclude
 
 SRC     = src/main.c src/lexer.c src/parser.c src/codegen.c
 TARGET  = cmp
