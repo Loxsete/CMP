@@ -32,6 +32,41 @@ static void usage(const char *prog)
     exit(1);
 }
 
+static char *preprocess(const char *filename)
+{
+    char *src = read_file(filename);
+
+    char *result = malloc(65536); // todo: dont do this
+    result[0] = '\0';
+
+    char *line = strtok(src, "\n");
+
+    while (line) {
+        if (strncmp(line, "%include", 8) == 0) {
+            char included[256];
+
+            if (sscanf(line, "%%include \"%255[^\"]\"", included) != 1) {
+                fprintf(stderr, "bad include syntax: %s\n", line);
+                exit(1);
+            }
+
+            char *inc_src = preprocess(included);
+            strcat(result, inc_src);
+            strcat(result, "\n");
+
+            free(inc_src);
+        } else {
+            strcat(result, line);
+            strcat(result, "\n");
+        }
+
+        line = strtok(NULL, "\n");
+    }
+
+    free(src);
+    return result;
+}
+
 static Options parse_args(int argc, char *argv[])
 {
     Options o = { NULL, "a", 0, 0 };
@@ -75,7 +110,7 @@ int main(int argc, char *argv[])
     if (opts.verbose)
         printf(":: reading %s\n", opts.input);
 
-    char *source = read_file(opts.input);
+	char *source = preprocess(opts.input);
 
     AST nodes[MAX_NODES];
     int node_count = 0;
