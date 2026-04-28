@@ -1,6 +1,0 @@
-extern getchar
-
-fn main() {
-    int c = getchar()
-    print(c)
-}
